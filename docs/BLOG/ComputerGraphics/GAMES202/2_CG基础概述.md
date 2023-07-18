@@ -2,8 +2,10 @@
 
 ## 1 渲染管线 Graphics Pipeline
 
+![渲染管线 Graphics Pipeline](assets/image-20230705000357-2y5zmoe.png "渲染管线 Graphics Pipeline")
+
 <div align=center>
-<img src="https://github.com/cxd-Gilneas/cxd-Gilneas.github.io/tree/main/docs/BLOG/ComputerGraphics/GAMES202/assets/image-20230705000357-2y5zmoe.png" width = "67%" alt="渲染管线 Graphics Pipeline" />
+<img src="assets/image-20230705000357-2y5zmoe.png" width = "67%" alt="渲染管线 Graphics Pipeline" />
 </div>
 <figure>渲染管线 Graphics Pipeline</figure>
 

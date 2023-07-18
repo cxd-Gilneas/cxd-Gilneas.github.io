@@ -2,10 +2,10 @@
 
 ## 1 渲染管线 Graphics Pipeline
 
-<figure markdown>
-  ![渲染管线 Graphics Pipeline](assets/image-20230705000357-2y5zmoe.png){ width="67%" }
-  <figcaption>渲染管线 Graphics Pipeline</figcaption>
-</figure>
+<div align=center>
+<img src="../assets/image-20230705000357-2y5zmoe.png" width = "50%" alt="渲染管线 Graphics Pipeline" />
+<figcaption>渲染管线 Graphics Pipeline</figcaption>
+</div>
 
 
 ## 2 OpenGL
@@ -63,14 +63,14 @@ GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 
 <div align=center>
 <img src="../assets/image-20230705000425-zkq4sr1.png" width = "50%" alt="渲染方程 Rendering Equation" />
+<figcaption>渲染方程 Rendering Equation</figcaption>
 </div>
-<figure>渲染方程 Rendering Equation</figure>
 
 而在实时渲染 real-time rendering (RTR) 中，**可见性Visibility ​**经常需要加入显式考虑因素中，并且 BRDF 往往和 cosine 一起考虑：
 
 <div align=center>
 <img src="../assets/image-20230705000444-vtd0yre.png" width = "50%" alt="加入 可见性项V 的渲染方程" />
+<figcaption>加入 可见性项V 的渲染方程</figcaption>
 </div>
-<figure>加入 可见性项V 的渲染方程</figure>
 
 在实时渲染中，对于全局光照 = 直接光照 + 间接光照中的间接光照只处理 **One-bounce 一次**间接反射

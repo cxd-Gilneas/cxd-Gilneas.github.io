@@ -2,7 +2,7 @@
 
 ## 1 渲染管线 Graphics Pipeline
 
-![image](assets/image-20230705000357-2y5zmoe.png "渲染管线 Graphics Pipeline")
+![渲染管线 Graphics Pipeline](assets/image-20230705000357-2y5zmoe.png "渲染管线 Graphics Pipeline"){width="67%"}
 
 
 ## 2 OpenGL
@@ -48,10 +48,10 @@ GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 
 渲染方程是渲染中最重要的方程，用于描述光线的传播：
 
-![image](assets/image-20230705000425-zkq4sr1.png "渲染方程 Rendering Equation")
+![渲染方程 Rendering Equation](assets/image-20230705000425-zkq4sr1.png "渲染方程 Rendering Equation"){width="50%"}
 
 而在实时渲染 real-time rendering (RTR) 中，**可见性Visibility ​**经常需要加入显式考虑因素中，并且 BRDF 往往和 cosine 一起考虑：
 
-![image](assets/image-20230705000444-vtd0yre.png "加入 可见性项V 的渲染方程")
+![加入 可见性项V 的渲染方程](assets/image-20230705000444-vtd0yre.png "加入 可见性项V 的渲染方程"){width="50%"}
 
 在实时渲染中，对于全局光照 = 直接光照 + 间接光照中的间接光照只处理 **One-bounce 一次**间接反射

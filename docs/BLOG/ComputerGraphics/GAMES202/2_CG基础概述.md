@@ -2,10 +2,10 @@
 
 ## 1 渲染管线 Graphics Pipeline
 
-<div align=center>
-<img src="../assets/image-20230705000357-2y5zmoe.png" width = "67%" alt="渲染管线 Graphics Pipeline" />
-</div>
-<figure>渲染管线 Graphics Pipeline</figure>
+<figure markdown>
+  ![渲染管线 Graphics Pipeline](assets/image-20230705000357-2y5zmoe.png){ width="67%" }
+  <figcaption>渲染管线 Graphics Pipeline</figcaption>
+</figure>
 
 
 ## 2 OpenGL

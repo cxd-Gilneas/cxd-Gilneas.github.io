@@ -2,11 +2,8 @@
 
 ## 1 渲染管线 Graphics Pipeline
 
-
-![渲染管线 Graphics Pipeline](assets/image-20230705000357-2y5zmoe.png "渲染管线 Graphics Pipeline"){width = "67%"}
-
 <div align=center>
-![渲染管线 Graphics Pipeline](assets/image-20230705000357-2y5zmoe.png "渲染管线 Graphics Pipeline"){width = "67%"}
+<img src="https://github.com/cxd-Gilneas/cxd-Gilneas.github.io/tree/main/docs/BLOG/ComputerGraphics/GAMES202/assets/image-20230705000357-2y5zmoe.png" width = "67%" alt="渲染管线 Graphics Pipeline" />
 </div>
 <figure>渲染管线 Graphics Pipeline</figure>
 
@@ -65,14 +62,14 @@ GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 渲染方程是渲染中最重要的方程，用于描述光线的传播：
 
 <div align=center>
-<img src="assets/image-20230705000425-zkq4sr1.png" width = "50%" alt="渲染方程 Rendering Equation" />
+<img src="https://github.com/cxd-Gilneas/cxd-Gilneas.github.io/tree/main/docs/BLOG/ComputerGraphics/GAMES202/assets/image-20230705000425-zkq4sr1.png" width = "50%" alt="渲染方程 Rendering Equation" />
 </div>
 <figure>渲染方程 Rendering Equation</figure>
 
 而在实时渲染 real-time rendering (RTR) 中，**可见性Visibility ​**经常需要加入显式考虑因素中，并且 BRDF 往往和 cosine 一起考虑：
 
 <div align=center>
-<img src="assets/image-20230705000444-vtd0yre.png" width = "50%" alt="加入 可见性项V 的渲染方程" />
+<img src="https://github.com/cxd-Gilneas/cxd-Gilneas.github.io/tree/main/docs/BLOG/ComputerGraphics/GAMES202/assets/image-20230705000444-vtd0yre.png" width = "50%" alt="加入 可见性项V 的渲染方程" />
 </div>
 <figure>加入 可见性项V 的渲染方程</figure>
 

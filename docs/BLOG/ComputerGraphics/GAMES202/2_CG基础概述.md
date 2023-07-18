@@ -2,11 +2,15 @@
 
 ## 1 渲染管线 Graphics Pipeline
 
+<div align=center>
 <img src="assets/image-20230705000357-2y5zmoe.png" width = "67%" alt="渲染管线 Graphics Pipeline" align="center" />
+</div>
 <figure>渲染管线 Graphics Pipeline</figure>
 
 
-是一系列从 CPU 调用 GPU 管线的 API 集合，其是跨平台的
+## 2 OpenGL
+
+**OpenGL** 是一系列从 CPU 调用 GPU 管线的 API 集合，其是跨平台的
 
 等位替代：DirectX, Vulkan, etc.
 
@@ -57,12 +61,16 @@ GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 
 渲染方程是渲染中最重要的方程，用于描述光线的传播：
 
+<div align=center>
 <img src="assets/image-20230705000425-zkq4sr1.png" width = "50%" alt="渲染方程 Rendering Equation" align="center" />
+</div>
 <figure>渲染方程 Rendering Equation</figure>
 
 而在实时渲染 real-time rendering (RTR) 中，**可见性Visibility ​**经常需要加入显式考虑因素中，并且 BRDF 往往和 cosine 一起考虑：
 
-<img src="assets/image-20230705000444-vtd0yre.png" width = "50%" alt="加入 可见性项V 的渲染方程" align="center" />
+<div align=center>
+<img src="assets/image-20230705000444-vtd0yre.png" width = "50%" alt="加入 可见性项V 的渲染方程" />
+</div>
 <figure>加入 可见性项V 的渲染方程</figure>
 
 在实时渲染中，对于全局光照 = 直接光照 + 间接光照中的间接光照只处理 **One-bounce 一次**间接反射

@@ -1,5 +1,9 @@
 # CG基础概述
 
+> 本课程为闫令琪老师的 [GAMES202-高质量实时渲染](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html)
+>
+> 此为个人的课堂笔记，如有疏漏，请多指正
+
 ## 1 渲染管线 Graphics Pipeline
 
 <div align=center>
@@ -25,7 +29,7 @@ OpenGL 的工作流：
 
 视图变换: 放置相机，并直接调用视图变换的相关函数和矩阵即可 (e.g. gluPerspective)
 
-创建并使用 framebuffer帧缓存
+创建并使用 framebuffer 帧缓存
 
 3）Attach a canvas to the easel 放置画布
 
@@ -52,7 +56,7 @@ OpenGL 中一个 Rendering Pass 的工作：对于**一次**场景渲染，可�
 
 ## 3 OpenGL Shading Language (GLSL)
 
-**Shading Language**：定义顶点着色器和片元着色器的着色语言。而着色语言最终还是要编译为汇编语言才能交给GPU进行处理
+**Shading Language**：定义顶点着色器和片元着色器的着色语言。而着色语言最终还是要编译为汇编语言才能交给 GPU 进行处理
 
 GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 
@@ -66,7 +70,7 @@ GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 <figcaption>渲染方程 Rendering Equation</figcaption>
 </div>
 
-而在实时渲染 real-time rendering (RTR) 中，**可见性Visibility ​**经常需要加入显式考虑因素中，并且 BRDF 往往和 cosine 一起考虑：
+而在实时渲染 Real-Time Rendering (RTR) 中，**可见性Visibility** 经常需要加入显式考虑因素中，并且 BRDF 往往和 cosine 一起考虑：
 
 <div align=center>
 <img src="../assets/image-20230705000444-vtd0yre.png" width = "67%" alt="加入 可见性项V 的渲染方程" />

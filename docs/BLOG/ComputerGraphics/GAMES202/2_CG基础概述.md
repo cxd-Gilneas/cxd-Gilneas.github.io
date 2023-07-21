@@ -1,4 +1,4 @@
-# CG基础概述
+# 二 CG基础概述
 
 > 本课程为闫令琪老师的 [GAMES202-高质量实时渲染](https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html)
 >

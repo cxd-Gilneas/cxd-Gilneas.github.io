@@ -1,0 +1,1244 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ziao德的个人网站">
+      
+      
+        <meta name="author" content="ziao德">
+      
+      
+        <link rel="canonical" href="https://cxd-Gilneas.github.io/BLOG/ComputerGraphics/GAMES202/4_%E5%AE%9E%E6%97%B6%E7%8E%AF%E5%A2%83%E5%85%89%E7%85%A7/">
+      
+      
+        <link rel="prev" href="../3_%E5%AE%9E%E6%97%B6%E9%98%B4%E5%BD%B1/">
+      
+      
+        <link rel="next" href="../5_%E5%AE%9E%E6%97%B6%E5%85%A8%E5%B1%80%E5%85%89%E7%85%A7/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>四 实时环境光照 Real-Time Environment Mapping - ziao德的个人网站</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../mkdocs/css/no-footer.css">
+    
+      <link rel="stylesheet" href="../../../../mkdocs/css/unordered-list-symbols.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#real-time-environment-mapping" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="ziao德的个人网站" class="md-header__button md-logo" aria-label="ziao德的个人网站" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ziao德的个人网站
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              四 实时环境光照 Real-Time Environment Mapping
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        技术博客
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../ME/" class="md-tabs__link">
+        我
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="ziao德的个人网站" class="md-nav__button md-logo" aria-label="ziao德的个人网站" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ziao德的个人网站
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../">技术博客</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          技术博客
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" checked>
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+          计算机图形学
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          计算机图形学
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_1" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_1" id="__nav_1_2_1_label" tabindex="0">
+          GAMES202-高质量实时渲染
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          GAMES202-高质量实时渲染
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%AE%9E%E6%97%B6%E6%B8%B2%E6%9F%93%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        一 实时渲染概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_CG%E5%9F%BA%E7%A1%80%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        二 CG基础概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E5%AE%9E%E6%97%B6%E9%98%B4%E5%BD%B1/" class="md-nav__link">
+        三 实时阴影 Real-Time Shadows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          四 实时环境光照 Real-Time Environment Mapping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        四 实时环境光照 Real-Time Environment Mapping
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-shading-from-environment-lighting" class="md-nav__link">
+    1 环境光照着色 Shading from Environment Lighting
+  </a>
+  
+    <nav class="md-nav" aria-label="1 环境光照着色 Shading from Environment Lighting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1）渲染方程的通用解法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-spilt-sum" class="md-nav__link">
+    2）环境光照渲染方程的近似解法 Spilt Sum 分离求和法
+  </a>
+  
+    <nav class="md-nav" aria-label="2）环境光照渲染方程的近似解法 Spilt Sum 分离求和法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-l-prefilter" class="md-nav__link">
+    （1）对 光照部分\(L\) 进行预滤波 PreFilter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-brdf-precompute" class="md-nav__link">
+    （2）对 BRDF 项的所有可能组合情况进行预计算 Precompute
+  </a>
+  
+    <nav class="md-nav" aria-label="（2）对 BRDF 项的所有可能组合情况进行预计算 Precompute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    a）初始情况
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-f-d" class="md-nav__link">
+    b）对 菲涅尔项\(F\) 和 微表面分布函数\(D\) 的近似
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-f-r_0" class="md-nav__link">
+    c）将 菲涅尔项\(F\) 的 基础反射率\(R_0\) 提取到定积分外部
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-shadow-from-environment-lighting" class="md-nav__link">
+    2 环境光照阴影 Shadow from Environment Lighting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-precomputed-radiance-transfer-prt" class="md-nav__link">
+    3 预计算辐射亮度传输 Precomputed Radiance Transfer (PRT)
+  </a>
+  
+    <nav class="md-nav" aria-label="3 预计算辐射亮度传输 Precomputed Radiance Transfer (PRT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-frequency-domain-filtering" class="md-nav__link">
+    1）频域 Frequency Domain 和滤波 Filtering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-spherical-harmonics-basis-functions" class="md-nav__link">
+    2）球谐函数 Spherical Harmonics 及其基函数 Basis functions
+  </a>
+  
+    <nav class="md-nav" aria-label="2）球谐函数 Spherical Harmonics 及其基函数 Basis functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-basis-functions" class="md-nav__link">
+    （1）基函数 Basis functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-spherical-harmonics" class="md-nav__link">
+    （2）球谐函数 Spherical Harmonics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    （3）球谐函数的一些重要性质
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    （4）球谐函数的使用实例：环境光下的漫反射着色计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-precomputed-radiance-transfer-prt_1" class="md-nav__link">
+    3）预计算辐射亮度传输 Precomputed Radiance Transfer (PRT)
+  </a>
+  
+    <nav class="md-nav" aria-label="3）预计算辐射亮度传输 Precomputed Radiance Transfer (PRT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lighting-light-transport" class="md-nav__link">
+    （1）预计算光照项 (lighting) 和光线传输项 (light transport)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2prt-diffuse-case" class="md-nav__link">
+    （2）PRT 的 Diffuse Case
+  </a>
+  
+    <nav class="md-nav" aria-label="（2）PRT 的 Diffuse Case">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adiffuse-case" class="md-nav__link">
+    A）Diffuse Case 下对渲染方程的第一种拆解方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bdiffuse-case" class="md-nav__link">
+    B）Diffuse Case 下对渲染方程的第二种拆解方式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3prt-glossy-case" class="md-nav__link">
+    （3）PRT 的 Glossy Case
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4prt" class="md-nav__link">
+    4）PRT 的优缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-wavelet" class="md-nav__link">
+    4）补充内容：小波函数 Wavelet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E5%AE%9E%E6%97%B6%E5%85%A8%E5%B1%80%E5%85%89%E7%85%A7/" class="md-nav__link">
+        五 实时全局光照 Real-Time Global Illumination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E5%AE%9E%E6%97%B6%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9D%80%E8%89%B2/" class="md-nav__link">
+        六 实时高质量着色 Real-Time Physically-based Materials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E5%AE%9E%E6%97%B6%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" class="md-nav__link">
+        七 实时光线追踪 Real-Time Ray-Tracing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E5%AE%9E%E6%97%B6%E6%B8%B2%E6%9F%93%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B7%A5%E4%B8%9A%E7%95%8C%E6%8A%80%E6%9C%AF/" class="md-nav__link">
+        八 实时渲染中常用的工业界技术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../ME/">我</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          我
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+<h1 id="real-time-environment-mapping">四 实时环境光照 Real-Time Environment Mapping<a class="headerlink" href="#real-time-environment-mapping" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本课程为闫令琪老师的 <a href="https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html">GAMES202-高质量实时渲染</a></p>
+<p>此为个人的课堂笔记，如有疏漏，请多指正</p>
+</blockquote>
+<h2 id="1-shading-from-environment-lighting">1 环境光照着色 Shading from Environment Lighting<a class="headerlink" href="#1-shading-from-environment-lighting" title="Permanent link">&para;</a></h2>
+<p><strong>基于图像的渲染 Image-Based Lighting (IBL)</strong>：通过 Spherical map 或者 Cube map 这些环境光照图直接计算环境光照并给定点着色的技术</p>
+<p>计算<strong>实时</strong>环境光照的关键在于：已经有了环境光照，即已经有了 <strong>Based Image</strong>，如何以<strong>最快的速度</strong>确定某个着色点应该如何着色</p>
+<p>由于不论何种光照，计算着色都需要解<strong>渲染方程 Rendering equation</strong>，因此如何以近似的方法，在尽量保证质量的情况下，降低解渲染方程的复杂度，便是实时光照需要重点解决的问题</p>
+<p>在暂时不考虑阴影问题（即 可见性<span class="arithmatex">\(V\)</span>）时，要解决的渲染方程如下：</p>
+<div class="arithmatex">\[
+L_o(p,\omega_o)=\int_{\Omega^+}L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)cos\theta_i d\omega_i
+\]</div>
+<h3 id="1">1）渲染方程的通用解法<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>蒙特卡洛积分 Monte Carlo integration，详见 <strong>GAMES101-光线追踪（蒙特卡洛积分与路径追踪）</strong></p>
+<p>问题：需要大量的样本才能将结果收敛到期望值，开销过大，速度很慢</p>
+<p>因此，希望找到一个<strong>避免大量采样</strong>的方法来减少开销</p>
+<h3 id="2-spilt-sum">2）环境光照渲染方程的近似解法 Spilt Sum 分离求和法<a class="headerlink" href="#2-spilt-sum" title="Permanent link">&para;</a></h3>
+<p>Spilt Sum 指的是将一个大的和式近似地拆解为多个和式计算，从而降低计算复杂度</p>
+<h4 id="1-l-prefilter">（1）对 光照部分<span class="arithmatex">\(L\)</span> 进行预滤波 PreFilter<a class="headerlink" href="#1-l-prefilter" title="Permanent link">&para;</a></h4>
+<p>已知现象：</p>
+<ol>
+<li>如果 BRDF项 的光泽度较高 <strong>glossy</strong>，那么积分时的积分率（支持集）<strong>support ​</strong>就会特别小</li>
+<li>如果 BRDF项 的漫反射程度较高 <strong>diffuse</strong>，那么积分函数就会特别平滑 <strong>smooth</strong></li>
+</ol>
+<div align=center>
+<img src="../assets/image-20230706173544-d2sewdy.png" width = "33%" alt="glossy（左）和 diffuse（右）的反射波瓣分布" />
+<figcaption>glossy（左）和 diffuse（右）的反射波瓣分布</figcaption>
+</div>
+
+<p>根据以上现象，可以利用“实时阴影-2 阴影映射技术背后的数学”中提及的用于估算定积分的经典的近似不等式，将 光照项<span class="arithmatex">\(L\)</span> 从积分中提到外面来，从而将渲染方程近似为以下方程：</p>
+<div class="arithmatex">\[
+L_o(p,\omega_o)\approx \frac{f_{\Omega_{f_r}}L_i(p,\omega_i)d\omega_i}{\int_{\Omega_{f_r}}d\omega_i}\cdot \int_{\Omega^+}f_r(p,\omega_i,\omega_o)cos\theta_i d\omega_i
+\]</div>
+<p>其效果相当于将 光照项<span class="arithmatex">\(L\)</span> 的特定区域进行滤波 Filter，具体到环境光照所使用的 Spherical map 或者 Cube map，就是将对应环境光照图进行了模糊处理。并且这个 Filter 操作可以提前进行，即 <strong>PreFilter</strong>。甚至可以进行<strong>多次滤波核大小不同的 PreFilter ​</strong>得到多张环境光照图，在最终使用时只需对两张环境光照图进行三线性插值即可，类似于 MipMap 的原理</p>
+<div align=center>
+<img src="../assets/image-20230706180019-vnf0bdi.png" width = "50%" alt="对环境光照图的多重滤波" />
+<figcaption>对环境光照图的多重滤波</figcaption>
+</div>
+
+<p>Spilt Sum 的第一步最终实现的效果就是将<strong>多次</strong>的采样变为<strong>一次</strong>对 理想镜面反射方向<span class="arithmatex">\(r\)</span> 的直接采样：</p>
+<div align=center>
+<img src="../assets/image-20230706181242-amed6t0.png" width = "33%" alt="对 光照部分L 的预滤波 PreFilter" />
+<figcaption>对 光照部分L 的预滤波 PreFilter</figcaption>
+</div>
+
+<h4 id="2-brdf-precompute">（2）对 BRDF 项的所有可能组合情况进行预计算 Precompute<a class="headerlink" href="#2-brdf-precompute" title="Permanent link">&para;</a></h4>
+<p>以下内容以微表面模型 Microfacet Model 作为例子进行讨论。微表面模型的具体内容可参考 <strong>GAMES101-材质与外观（微表面模型）</strong></p>
+<h5 id="a">a）初始情况<a class="headerlink" href="#a" title="Permanent link">&para;</a></h5>
+<p>微表面模型的 BRDF 如下：</p>
+<div class="arithmatex">\[
+f_r(p,\omega_i,\omega_o)=\frac{F(\omega_o,h)G(\omega_i,\omega_o,h)D(h)}{4(n\cdot\omega_i)(n\cdot\omega_o)}
+\]</div>
+<p>其中 <span class="arithmatex">\(F\)</span>、<span class="arithmatex">\(G\)</span> 和 <span class="arithmatex">\(D\)</span> 分别是菲涅尔方程、几何遮蔽函数和法线分布函数。其中 <span class="arithmatex">\(h\)</span> 是介于 <span class="arithmatex">\(\omega_i\)</span> 和 <span class="arithmatex">\(\omega_o\)</span> 之间的半程向量 (half vector)</p>
+<p>其中 菲涅尔项<span class="arithmatex">\(F\)</span> 如下：</p>
+<div align=center>
+<img src="../assets/image-20230707103909-671bp9p.png" width = "67%" alt="菲涅尔项F" />
+<figcaption>菲涅尔项F</figcaption>
+</div>
+
+<p>在该 BRDF 模型上直接对所有可能组合情况进行预计算，需要考虑 <strong>RGB</strong>、<strong>roughness</strong>、<strong>入射角度</strong>​<span class="arithmatex">\(\omega_i\)</span>（这里表现为半程向量 <span class="arithmatex">\(h\)</span>） 共<strong>五维</strong>的情况来打表，计算和存储量为海量，无法实现</p>
+<h5 id="b-f-d">b）对 菲涅尔项<span class="arithmatex">\(F\)</span> 和 微表面分布函数<span class="arithmatex">\(D\)</span> 的近似<a class="headerlink" href="#b-f-d" title="Permanent link">&para;</a></h5>
+<p>对于 菲涅尔项<span class="arithmatex">\(F\)</span> 可以进行石里克近似 Schlick's approximation：</p>
+<div class="arithmatex">\[
+F(\omega_o,h)=R_0+(1-R_0)(1-\omega_o\cdot h)^5
+\]</div>
+<p>其中，<span class="arithmatex">\(R_0=\left(\frac{\eta_1-\eta_2}{\eta_1+\eta_2}\right)^2\)</span>是基底颜色（基础反射率），其中 <span class="arithmatex">\(\eta_1\)</span> 和 <span class="arithmatex">\(\eta_2\)</span> 是着色点所处表面两侧介质的折射率</p>
+<p>对于 微表面分布函数<span class="arithmatex">\(D\)</span> 的分布可以用 Beckmann 模型描述：</p>
+<div class="arithmatex">\[
+\mathbf{D}(h)=\frac{e^{\frac{(n\cdot h)^2-1}{\alpha^2(n\cdot h)^2}}}{\pi\alpha^2(n\cdot h)^4}
+\]</div>
+<p>其中 <span class="arithmatex">\(\alpha\)</span> 定义了 roughness，<span class="arithmatex">\(h\)</span> 是介于 <span class="arithmatex">\(\omega_i\)</span> 和 <span class="arithmatex">\(\omega_o\)</span> 之间的半程向量（可以被认为与 入射角<span class="arithmatex">\(\omega_i\)</span> 相关）</p>
+<p>通过以上近似，就可以将最开始的<strong>五维</strong>降低为<strong>三维</strong>：<strong>基底颜色</strong>​<span class="arithmatex">\(R_0\)</span>、<strong>粗糙度roughness</strong>、<strong>入射角度</strong>​<span class="arithmatex">\(\omega_i\)</span></p>
+<h5 id="c-f-r_0">c）将 菲涅尔项<span class="arithmatex">\(F\)</span> 的 基础反射率<span class="arithmatex">\(R_0\)</span> 提取到定积分外部<a class="headerlink" href="#c-f-r_0" title="Permanent link">&para;</a></h5>
+<p>通过如下变换将 <span class="arithmatex">\(R_0\)</span> 提取到定积分外部：</p>
+<div class="arithmatex">\[
+\begin{align}
+\int_{\Omega^+}f_r(p,\omega_i,\omega_o)cos\theta_i d\omega_i
+=&amp;\int_{\Omega^+}f_r(p,\omega_i,\omega_o)\frac{F(\omega_o,h)}{F(\omega_o,h)}cos\theta_id\omega_i
+\\
+=&amp;\int_{\Omega^+}\frac{f_r(p,\omega_i,\omega_o)}{F(\omega_o,h)}F(\omega_o,h)cos\theta_id\omega_i
+\\
+\approx&amp; \int_{\Omega^+}\frac{f_r(p,\omega_i,\omega_o)}{F(\omega_o,h)}(R_0+(1-R_0)(1-\omega_o\cdot h)^5)cos\theta_id\omega_i
+\\
+=&amp;\int_{\Omega^+}\frac{f_r(p,\omega_i,\omega_o)}{F(\omega_o,h)}(R_0(1-(1-\omega_o\cdot h)^5)+(1-\omega_o\cdot h)^5)cos\theta_id\omega_i
+\\
+=&amp;R_0\int_{\Omega^+}f_r(p,\omega_i,\omega_o)(1-(1-\omega_o\cdot h)^5)cos\theta_id\omega_i
++\int_{\Omega}f_r(p,\omega_i,\omega_o)(1-\omega_o\cdot h)^5 cos\theta_i d\omega_i
+\end{align}
+\]</div>
+<p>于是定积分的部分不再依赖于 基础反射率<span class="arithmatex">\(R_0\)</span>，在预计算时只需要考虑 <strong>粗糙程度roughness ​</strong>和 <strong>入射角度</strong>​<span class="arithmatex">\(\theta\)</span>​<strong>​ ​</strong>即可</p>
+<div align=center>
+<img src="../assets/image-20230707112710-2wkxx51.png" width = "25%" alt="二维预计算 BRDF 的查找表" />
+<figcaption>二维预计算 BRDF 的查找表</figcaption>
+</div>
+
+<p>通过以上过程将一个五维的预计算降低至二维，使得其消耗很小，从而能在实时光照中实现对 BRDF项 的所有可能组合情况进行预计算</p>
+<p>综上，通过 Spilt Sum 分离求和法成功实现对环境光照渲染方程的近似求解，最终实现的效果对比如下：</p>
+<div align=center>
+<img src="../assets/image-20230707112824-6ohbuuh.png" width = "67%" alt="Spilt Sum 分离求和法求解环境光照的效果" />
+<figcaption>Spilt Sum 分离求和法求解环境光照的效果</figcaption>
+</div>
+
+<h2 id="2-shadow-from-environment-lighting">2 环境光照阴影 Shadow from Environment Lighting<a class="headerlink" href="#2-shadow-from-environment-lighting" title="Permanent link">&para;</a></h2>
+<p>如果在着色时需要考虑环境光的可见性，则实现实时环境光照是一个相当困难的问题：</p>
+<ol>
+<li>因为环境光照来自四面八方，所以如果把环境光照下的着色看作多光绘制 (many-light rendering)，则每一个光源都要生成一张阴影图，那么阴影图的数量将极其庞大</li>
+<li>而如果把该问题看作抽样问题，则环境光照的 可见性项<span class="arithmatex">\(V\)</span> 可能是任意复杂度，不能根据 Split Sum 方法估计积分结果。因为 光照项<span class="arithmatex">\(L\)</span> 的支撑集是整个半球（即 support 很大，因为是四面八方的环境光）、BRDF项 也可能并不平滑（在 光照项<span class="arithmatex">\(L\)</span> 的 support 很大的情况下想要用 Split Sum 方法则必须保证另一项 BRDF 的积函数十分平滑，然而这并不一定，比如材质很 glossy 的时候），以上约束导致并不能利用 Split Sum 方法将 可见性项<span class="arithmatex">\(V\)</span> 拆解到定积分的外面</li>
+</ol>
+<p>因此工业界的一般解决方案是选取环境中最亮的那个光源（例如太阳）或前几个光源生成阴影图，然后由此生成阴影</p>
+<h2 id="3-precomputed-radiance-transfer-prt">3 预计算辐射亮度传输 Precomputed Radiance Transfer (PRT)<a class="headerlink" href="#3-precomputed-radiance-transfer-prt" title="Permanent link">&para;</a></h2>
+<p>之前提到环境光照阴影是很难在实时实现渲染的，但是 <strong>预计算辐射亮度传输PRT ​</strong>技术是这个问题的一个解决方案</p>
+<p>在了解 PRT 前需要了解的前置基础知识：</p>
+<ol>
+<li><strong>频域 Frequency Domain 和滤波 Filtering</strong></li>
+<li><strong>球谐函数 Spherical Harmonics 及其基函数 Basis functions</strong></li>
+</ol>
+<h3 id="1-frequency-domain-filtering">1）频域 <strong>Frequency Domain 和滤波 Filtering</strong><a class="headerlink" href="#1-frequency-domain-filtering" title="Permanent link">&para;</a></h3>
+<p>详细内容参考 <strong>GAMES101-光栅化（深度测试与抗锯齿）</strong></p>
+<p>在此基础上对于渲染方程的定积分的一个更通用的理解：</p>
+<p>两个函数 <span class="arithmatex">\(f(x)\)</span> 和 <span class="arithmatex">\(g(x)\)</span> 相乘的结果再进行积分，这个操作可以认为是一个卷积/滤波。而 <span class="arithmatex">\(f(x)\)</span> 和 <span class="arithmatex">\(g(x)\)</span> 相乘后再积分可以认为是<strong>时域上两个信号相乘后再卷积</strong>，其结果就是<strong>频域上的两个信号相乘</strong>（参考卷积定理 Convolution Theorem）</p>
+<p>而如果这两个频域上的信号有一个是<strong>低频 Low frequency ​</strong>的，则它们相乘的结果也是低频的，也就对应着卷积后的结果是<strong>平滑 smooth ​</strong>的。积分后结果的频率取决于两个信号中<strong>更低</strong>的那个的频率（两个频谱图相乘，如果一个地方没信号，相乘的结果当然也就没信号了）</p>
+<h3 id="2-spherical-harmonics-basis-functions">2）<strong>球谐函数 Spherical Harmonics 及其基函数 Basis functions</strong><a class="headerlink" href="#2-spherical-harmonics-basis-functions" title="Permanent link">&para;</a></h3>
+<h4 id="1-basis-functions">（1）基函数 Basis functions<a class="headerlink" href="#1-basis-functions" title="Permanent link">&para;</a></h4>
+<p>一个函数 <span class="arithmatex">\(f(x)\)</span> 可以描述为其他一系列函数的线性组合，这些组合的函数就称为函数 <span class="arithmatex">\(f(x)\)</span> 的<strong>基函数 Basis functions</strong></p>
+<div class="arithmatex">\[
+f(x)=\sum\limits_ic_i\cdot B_i(x)
+\]</div>
+<p>例如，傅里叶级数展开的一系列函数就是一套基函数</p>
+<h4 id="2-spherical-harmonics">（2）球谐函数 Spherical Harmonics<a class="headerlink" href="#2-spherical-harmonics" title="Permanent link">&para;</a></h4>
+<p>球谐函数 Spherical Harmonics：指的是一系列定义在<strong>球面</strong>上的<strong>二维基函数</strong></p>
+<p>不同阶的 SH基函数 如下：</p>
+<div align=center>
+<img src="../assets/image-20230710100629-mvzvlca.png" width = "50%" alt="不同阶的 SH基函数" />
+<figcaption>不同阶的 SH基函数</figcaption>
+</div>
+
+<p>每一阶 SH 有 2L+1 个基函数，前 n 阶 SH 共有 n^2^ 个基函数。L 越大则代表频率越大</p>
+<p>对于一个二维球面函数，如果想要展开成一系列 SH基函数 的线性组合，计算每一个基函数前面的系数 <span class="arithmatex">\(c_i\)</span>（这个过程可以被称为投影，即将一个二维球面函数投影到每一个 SH基函数 上）的公式如下：</p>
+<div class="arithmatex">\[
+c_i=\int_{\Omega}f(\omega)B_i(\omega)\mathrm{d}\omega
+\]</div>
+<p>注：投影操作一般是通过点乘实现的，而这个积分的本质其实就是点乘</p>
+<p>这样就可以得到每一个二维球面函数关于 SH基函数 的线性组合表达式了。不过一般情况下，为了避免过于复杂的计算量，并且保证实现效果的前提下，只会使用到前4阶 (L = 0~3) 的 SH基函数</p>
+<h4 id="3">（3）球谐函数的一些重要性质<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ol>
+<li>orthonormal（正交性）：SH是一组正交基，SH的一个基函数投影到另一个任意基函数上的值为0：<span class="arithmatex">\(\int_{\Omega}B_i(i)\cdot B_j(i)\mathrm{d}i=1(i=j);\int_{\Omega}B_i(i)\cdot B_j(i)\mathrm{d}i=0(i\ne j)\)</span></li>
+<li>simple projection/reconstruction（投影运算简单）：<span class="arithmatex">\(c_i=\int_{\Omega}f(\omega)B_i(\omega)\mathrm{d}\omega\)</span></li>
+<li>simple rotation（旋转运算简单）：任何一个被一组SH基函数线性组合表示的二维球面函数发生旋转时，可以等价为对每一个基函数进行旋转，而每一个基函数旋转后的结果，都可以被其同阶的基函数的线性组合表示（因此可以很方便地进行预计算——提前打表）</li>
+<li>simple convolution（卷积运算简单）</li>
+</ol>
+<h4 id="4">（4）球谐函数的使用实例：环境光下的漫反射着色计算<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p>UC San Diego 的 Ravi Ramamoorthi 教授的博士论文：<a href="https://cseweb.ucsd.edu/~ravir/prtsurvey.pdf">Precomputation-Based Rendering (Ravi Ramamoorthi)</a></p>
+<p>主要思想：当计算漫反射时，渲染方程的 BRDF项 仅需要<strong>前三阶共9个 ​</strong>SH基函数 即可较为准确地描述出来，即只需要前三阶的低频信息即可。而考虑到渲染方程的积分可以视为<strong>频域上的两个信号</strong> <span class="arithmatex">\(L\)</span>​<strong>项</strong> <strong>和 BRDF项 相乘</strong>，若其中的 BRDF项 为低频的，则结果也是低频的，此处的 BRDF项 就类似于一个<strong>低通滤波器</strong>，因此对于 光照<span class="arithmatex">\(L\)</span>项 也就根本<strong>不需要高频信息</strong>来描述，仅需要前三阶的低频信息即可</p>
+<p>在 BRDF项 仅使用前3阶 SH基函数 描述的同时，对 光照<span class="arithmatex">\(L\)</span>项 也仅使用前3阶 SH基函数 描述的实现效果：</p>
+<div align=center>
+<img src="../assets/image-20230710112744-8e6xxcu.png" width = "50%" alt="仅使用前3阶 SH基函数 描述 光照L项 和 BRDF项 的漫反射着色" />
+<figcaption>仅使用前3阶 SH基函数 描述 光照L项 和 BRDF项 的漫反射着色</figcaption>
+</div>
+
+<p>综上所述：</p>
+<ol>
+<li>当想要尽量完整地描述光照信息时，使用足量的 SH基函数 进行描述</li>
+<li>当只需要低频的信息时（比如漫反射下的 BRDF项 和与其关联的 <span class="arithmatex">\(L\)</span>项），使用低频的 SH基函数 描述即可实现</li>
+</ol>
+<p>有关球谐函数的两个个比较易懂的解释参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/351289217">球谐函数介绍（Spherical Harmonics） - 知乎 (zhihu.com)</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/514017351">球面高斯介绍（Spherical Gaussian） - 知乎 (zhihu.com)</a></p>
+<h3 id="3-precomputed-radiance-transfer-prt_1">3）预计算辐射亮度传输 Precomputed Radiance Transfer (PRT)<a class="headerlink" href="#3-precomputed-radiance-transfer-prt_1" title="Permanent link">&para;</a></h3>
+<p>对于环境光照计算的完整渲染方程如下：</p>
+<div align=center>
+<img src="../assets/image-20230710114057-xrdvgi7.png" width = "50%" alt="计算环境光照的渲染方程" />
+<figcaption>计算环境光照的渲染方程</figcaption>
+</div>
+
+<p>如果想要计算这个积分，则对于每一个着色点 shading point，需要计算6（Map的六个图） * 64 * 64（分辨率）次，计算量极为庞大</p>
+<p><strong>预计算辐射亮度传输 PRT ​</strong>的核心思想是假设场景中的只有光照会发生变化，将绘制方程的被积函数拆分成光照 (lighting) 和光线传输 (light transport) 这两部分，并分别预计算两者的纹理图像，再把图像从空间域（时域）转换到频域，最终把着色时绘制方程中的定积分计算转换成<strong>向量的点积</strong> (Diffuse Case)，或者转换成<strong>向量与矩阵的乘法 ​</strong>(Glossy Case)</p>
+<div align=center>
+<img src="../assets/image-20230710120530-ausqjau.png" width = "67%" alt="光照项 (lighting) 和光线传输项 (light transport)" />
+<figcaption>光照项 (lighting) 和光线传输项 (light transport)</figcaption>
+</div>
+
+<h4 id="1-lighting-light-transport">（1）预计算光照项 (lighting) 和光线传输项 (light transport)<a class="headerlink" href="#1-lighting-light-transport" title="Permanent link">&para;</a></h4>
+<p>对于光照项 Lighting，可以用 SH基函数 的线性组合来近似表示</p>
+<p>对于光线传输项 Lighting transport，在场景只有光照情况会发生改变时，可以被视为一个二维球面函数，也可以用 SH基函数 的线性组合来近似表示</p>
+<p>即，将光照项 Lighting 和光线传输项 Lighting transport 的信号从时域（空间域）转换到频域：</p>
+<div class="arithmatex">\[
+L_i(\omega_i)\approx\sum_p l_p B_p(\omega_i)
+\]</div>
+<div class="arithmatex">\[
+T(\omega_i,\omega_o)\approx \sum_q t_q(\omega_o) \cdot B_q(\omega_i)
+\]</div>
+<h4 id="2prt-diffuse-case">（2）PRT 的 Diffuse Case<a class="headerlink" href="#2prt-diffuse-case" title="Permanent link">&para;</a></h4>
+<h5 id="adiffuse-case">A）Diffuse Case 下对渲染方程的第一种拆解方式<a class="headerlink" href="#adiffuse-case" title="Permanent link">&para;</a></h5>
+<p>在漫反射模型中，<strong>BRDF项 ​</strong>可以认为是一个 <strong>常数</strong>​<span class="arithmatex">\(\rho\)</span>，与光线 入射方向<span class="arithmatex">\(\omega_i\)</span> 和 视角方向<span class="arithmatex">\(\omega_o\)</span> 均没有关系，因此在渲染方程中可以拆解到积分外面：</p>
+<div class="arithmatex">\[
+\begin{align}
+L(\omega_o)=&amp;\int_{\Omega^+}L_i(\omega_i)f_r(p,\omega_i,\omega_o)cos\theta_i V(\omega_i) \mathrm{d}\omega_i
+\\
+=&amp;\rho \cdot \int_{\Omega^+}L_i(\omega_i)cos\theta_i V(\omega_i) \mathrm{d}\omega_i
+\end{align}
+\]</div>
+<p>对于<strong>光照项 Lighting</strong>，可以用 <strong>SH基函数 的线性组合</strong>来近似表示（p 是对基函数的计数，<span class="arithmatex">\(\omega_i\)</span> 是光线入射方向）：</p>
+<div class="arithmatex">\[
+L_i(\omega_i)\approx\sum_p l_p B_p(\omega_i)
+\]</div>
+<p>在 PRT 中，可以<strong>交换积分和求和</strong>得到基本近似的结果，因此渲染方程转换为如下表示：</p>
+<div class="arithmatex">\[
+L(\omega_o)=\rho \cdot \sum_p l_p \cdot \int_{\Omega^+}B_p(\omega_i)cos\theta_i V(\omega_i) \mathrm{d}\omega_i
+\]</div>
+<p>此时，积分项 <span class="arithmatex">\(\int_{\Omega^+}B_p(\omega_i)cos\theta_i V(\omega_i) \mathrm{d}\omega_i\)</span> 的计算结果很凑巧就是光线传输项 Lighting transport <span class="arithmatex">\(f(\omega_i) = cos\theta_i V(\omega_i)\)</span> <strong>用 SH基函数 线性表示时的系数</strong> <span class="arithmatex">\(t_p\)</span></p>
+<p>（注：这里这个“凑巧”的推导过程如下：<span class="arithmatex">\(f(\omega_i)\)</span> 是一个二维球面函数，其可以用 SH基函数 近似线性表示为 <span class="arithmatex">\(f(\omega_i)\approx\sum\limits_{p}t_p\cdot B_p(\omega_i)\)</span>，而想要求每个基函数对应的系数 <span class="arithmatex">\(t_p\)</span>，就需要求 <span class="arithmatex">\(f(\omega_i)\)</span> 在这个基函数下面的投影，也就是求下面这个定积分：<span class="arithmatex">\(t_p=\int_{\Omega^+} f(\omega_i)·B_p(\omega_i)\mathrm{d}\omega_i\)</span>，将 <span class="arithmatex">\(f(\omega_i)\)</span> 展开就是 <span class="arithmatex">\(t_p=\int_{\Omega^+} B_p(\omega_i)cos\theta_i V(\omega_i) \mathrm{d}\omega_i\)</span>，就是上面这个积分项）</p>
+<p>最终得到渲染方程的近似表示如下：</p>
+<div class="arithmatex">\[
+L(\omega_o) \approx \rho \cdot \sum_p l_p t_p
+\]</div>
+<p>这样，渲染方程就近似简化为了对一个<strong>点积</strong>进行求和，其中 <span class="arithmatex">\(l_i\)</span> 和 <span class="arithmatex">\(T_i\)</span> 可以被预计算打表，只要对于每一个着色点提前对球面函数求在每一个基函数上的投影以得到每一个基函数的系数即可</p>
+<p>以上分析的完整过程如下：</p>
+<div align=center>
+<img src="../assets/image-20230710151455-bgplwvb.png" width = "50%" alt="PRT 的 Diffuse Case 的 第一种拆解方式" />
+<figcaption>PRT 的 Diffuse Case 的 第一种拆解方式</figcaption>
+</div>
+
+<p>这个简化过程的缺点在于：除了光照之外（仅限于环境光照发生的旋转），<strong>场景必须是不可变的</strong>。因为一旦场景发生了更改，<span class="arithmatex">\(t_p=\int_{\Omega^+} B_p(\omega_i)cos\theta_i V(\omega_i) \mathrm{d}\omega_i\)</span> 中的这个定积分结果就会发生变化，<span class="arithmatex">\(t_p\)</span> 的值就会发生变化，提前打表的结果就无效了。那么为什么类似情况的光照（仅限于环境光照发生的旋转）的 <span class="arithmatex">\(L(\omega_i)\)</span> 不受影响呢？因为根据球谐函数<strong>旋转运算简单 simple rotation ​</strong>的性质，当光照信息这个球面函数发生旋转时，相当于每一个基函数都发生对应旋转，而基函数旋转后可以直接表示为另一套基函数的组合，因此只需要额外打一张<strong>旋转角度-基函数系数</strong>的表然后在光照信息发生旋转时代入计算就可以解决该问题</p>
+<p>注：对于可预计算的 <span class="arithmatex">\(t_p\)</span>（对应下图的 <span class="arithmatex">\(T_i\)</span>），可以把其中的 <span class="arithmatex">\(B_p(\omega_i)\)</span>（对应下图的<span class="arithmatex">\(B_i(i)\)</span>）视为一套以基函数作为光照的另类的光照项 Lighting，这样 <span class="arithmatex">\(t_p\)</span> 就是对这套光照项的预计算，最后的渲染方程就是将这套预计算的每个值分别乘一个系数 <span class="arithmatex">\(l_p\)</span> 然后求和的结果：</p>
+<div align=center>
+<img src="../assets/image-20230710144416-woit89w.png" width = "50%" alt="对于光线传输项的基函数系数 Ti 的一种特殊理解方式" />
+<figcaption>对于光线传输项的基函数系数 Ti 的一种特殊理解方式</figcaption>
+</div>
+
+<h5 id="bdiffuse-case">B）Diffuse Case 下对渲染方程的第二种拆解方式<a class="headerlink" href="#bdiffuse-case" title="Permanent link">&para;</a></h5>
+<p>对于 Diffuse Case，渲染方程的光照传输项中的 BRDF 部分和视角方向 <span class="arithmatex">\(\omega_o\)</span> 无关，此时光照项 Lighting 和光线传输项 Lighting transport 可以都用 <strong>SH基函数 的线性组合</strong>来近似表示：</p>
+<div class="arithmatex">\[
+L_i(\omega_i)\approx\sum_p l_p B_p(\omega_i)
+\]</div>
+<div class="arithmatex">\[
+T(\omega_i)\approx \sum_q t_q  B_q(\omega_i)
+\]</div>
+<p>然后将其代入渲染方程得到下式：</p>
+<div class="arithmatex">\[
+L(\omega_o)\approx \sum_p\sum_q l_pt_q\int_{\Omega^+}B_p(\omega_i)B_q(\omega_i) d\omega_i
+\]</div>
+<p>虽然这个双重求和公式看起来是 <span class="arithmatex">\(O(n^2)\)</span> 的复杂度，但是根据球谐函数的<strong>正交性</strong>特性， <span class="arithmatex">\(B_p(\omega_i)·B_q(\omega_i)\)</span> 的值只有在 <span class="arithmatex">\(p\)</span> 和 <span class="arithmatex">\(q\)</span> 是相同情况下（即同一个基函数）才不是0。这意味着这个双重求和只需要求 <span class="arithmatex">\(p=q\)</span> 的情况，又降低为 <span class="arithmatex">\(O(n)\)</span> 复杂度了</p>
+<p>以上分析的完整过程如下：</p>
+<div align=center>
+<img src="../assets/image-20230710182135-88f4t5r.png" width = "50%" alt="PRT 的 Diffuse Case 的 第二种拆解方式" />
+<figcaption>PRT 的 Diffuse Case 的 第二种拆解方式</figcaption>
+</div>
+
+<h4 id="3prt-glossy-case">（3）PRT 的 Glossy Case<a class="headerlink" href="#3prt-glossy-case" title="Permanent link">&para;</a></h4>
+<p>Glossy 的物体相对于 Diffuse 的物体，其渲染方程最大的一点区别在于：BRDF项 不再是一个常数，而是<strong>和光线入射方向</strong> <span class="arithmatex">\(\omega_i\)</span> <strong>和视角方向</strong> <span class="arithmatex">\(\omega_o\)</span> <strong>直接相关</strong>。光线入射方向 <span class="arithmatex">\(\omega_i\)</span> 在之前的讨论中一直是看作一个可变量处理，因此不影响复杂度；但是视角方向 <span class="arithmatex">\(\omega_o\)</span> 在 Glossy Case 中是一个新增的可变量，这就导致以 PRT 的方法近似得到的渲染方程（以第一种拆解方式为例）新增了一个维度 <span class="arithmatex">\(\omega_o\)</span>：</p>
+<div class="arithmatex">\[
+L(\omega_o) \approx \sum_p l_p t_p(\omega_o)
+\]</div>
+<p>对此的一个直观的理解就是：之前 Diffuse Case 无论摄像机视角怎么移动，着色结果都不会发生变化，因此 <span class="arithmatex">\(T_i\)</span> 可以直接打表进行一个<strong>一维的预计算</strong>；而在 Glossy Case 中一旦摄像机视角 <span class="arithmatex">\(\omega_o\)</span> 发生移动，<span class="arithmatex">\(t_p\)</span> 作为一个<strong>关于</strong> <span class="arithmatex">\(\omega_o\)</span> <strong>的二维函数</strong>（<span class="arithmatex">\(\theta\)</span> 和 <span class="arithmatex">\(\phi\)</span>）就会发生变化，如果仍然想要为 <span class="arithmatex">\(t_p\)</span> 进行打表，需要为场景中的每一个可能的摄像机视角（<span class="arithmatex">\(\theta\)</span> 和 <span class="arithmatex">\(\phi\)</span>）进行打表，这显然是一个极其大的计算和存储量</p>
+<p>进一步，考虑到 <span class="arithmatex">\(t_p(\omega_o)\)</span> 本身也是一个二维球面函数，也可以利用 <strong>SH基函数 的线性组合</strong>来表示（注意由于 <span class="arithmatex">\(t_p\)</span> 本身就是一个根据 <span class="arithmatex">\(p\)</span> 变化的值，已经有了一个维度，这里再进行一次近似变换需要多出一个维度，所以前面的系数是一个二维矩阵 <span class="arithmatex">\(t_{pk}\)</span>，而不是之前的一维向量）：</p>
+<div class="arithmatex">\[
+t_p(\omega_o)=\sum_kt_{pk}B_k(\omega_o)
+\]</div>
+<p>代入到公式中可以得到如下近似渲染方程：</p>
+<div class="arithmatex">\[
+L(\omega_o)\approx\sum_p (\sum_k l_p t_{pk})B_k(\omega_o)
+\]</div>
+<p>其实现的计算效果如下：</p>
+<div align=center>
+<img src="../assets/image-20230710190400-m5l5nh9.png" width = "50%" alt="PRT 的 Glossy Case 简化为向量和矩阵的乘积" />
+<figcaption>PRT 的 Glossy Case 简化为向量和矩阵的乘积</figcaption>
+</div>
+
+<p>这样，渲染方程就近似简化为了对一个<strong>向量和矩阵的乘积</strong>进行求和，每一个着色点需要提前对球面函数 <span class="arithmatex">\(L(\omega_i)\)</span> 求在每一个基函数上的投影以得到每一个基函数的系数 <span class="arithmatex">\(l_p\)</span>，然后对于这一维的每一种情况再求一次对球面函数 <span class="arithmatex">\(t_p(\omega_o)\)</span> 在每一个基函数上的投影以得到每一个基函数的系数 <span class="arithmatex">\(t_{pk}\)</span></p>
+<p>以上分析的完整过程如下：</p>
+<div align=center>
+<img src="../assets/image-20230710191235-9p0c0mt.png" width = "50%" alt="PRT 的 Glossy Case 的第一种拆解方式" />
+<figcaption>PRT 的 Glossy Case 的第一种拆解方式</figcaption>
+</div>
+
+<div align=center>
+<img src="../assets/image-20230710191305-dzmme0m.png" width = "50%" alt="PRT 的 Glossy Case 的第二种拆解方式" />
+<figcaption>PRT 的 Glossy Case 的第二种拆解方式</figcaption>
+</div>
+
+<p>Glossy Case 的代价相对 Diffuse Case 大幅提升，体现在</p>
+<ol>
+<li>存储空间上，每个点都需要额外存储一个二维的 transport matrix，而不是之前的一个一维向量 <span class="arithmatex">\(t_p\)</span></li>
+<li>时间复杂度上，以使用前4阶 SH基函数 的情况为例，Diffuse Case 的每个点只需要计算1次 size 为16的向量点乘，而 Glossy Case 的每个点需要将计算1次 size 为16的向量和 size 为16*16的矩阵的乘积</li>
+</ol>
+<h3 id="4prt">4）PRT 的优缺点<a class="headerlink" href="#4prt" title="Permanent link">&para;</a></h3>
+<p>PRT 的优势：</p>
+<ol>
+<li>对于任何光线路径，从没有反射的 LE (Light-Eye)，到简单的直接光照 L(D|G)E (Light-Diffuse/Glossy-Eye)，再到复杂的数次 bounce 的间接光照 L(D|G)·E 以及涉及到镜面反射的 LS·(D|G)·E (Light-Specular-Diffuse/Glossy-Eye)，都可以<strong>将 L 和 E 之间的部分看作是 Light Transport项</strong>，然后利用 PRT 的思想进行对应的预计算（虽然情况越复杂预计算所需的空间和时间开销越大，但是不论多长时间其都是独立于实时渲染之外的）</li>
+<li>预计算带来的实时渲染效率的提高十分显著</li>
+</ol>
+<p>PRT 的缺陷：</p>
+<ol>
+<li>PRT 的预计算要求<strong>场景不可动</strong>（但是视角和光源可动）</li>
+<li>PRT <strong>只适用于比较低频的信息</strong>，对于高频的信息（例如材质特别 Glossy，接近于镜面反射的）实现效果不好，因为高频信息需要特别高阶的 SH基函数 才能够近似。因此，虽然根据 PRT 的优势1，它其实任何光照（包括实时全局光照）都可以实现，不仅限于实时环境光照，但是实际应用中考虑到开销问题，PRT 的主要应用场景还是在大部分都是低频信息的实时环境光照</li>
+<li>大量的预计算数据，预计算需要的时间和空间的开销很大</li>
+</ol>
+<h3 id="4-wavelet">4）补充内容：小波函数 Wavelet<a class="headerlink" href="#4-wavelet" title="Permanent link">&para;</a></h3>
+<p><strong>小波函数 Wavelet ​</strong>和球谐函数类似，也是一系列的基函数。区别于球谐函数是定义在球面上的，小波函数可以理解为定义在图像块上的，并且不同小波基函数的定义域还不相同</p>
+<div align=center>
+<img src="../assets/image-20230711103627-zi5w7sv.png" width = "25%" alt="小波函数 Wavelet" />
+<figcaption>小波函数 Wavelet</figcaption>
+</div>
+
+<p>小波函数相对于球谐函数的优势在于：它支持表示<strong>全频率的信息</strong>，对于高频信息的还原效果显著优于球谐函数，因此对于高频的光照和阴影信息都可以较好地还原</p>
+<div align=center>
+<img src="../assets/image-20230711103731-qfpzhv3.png" width = "50%" alt="球谐函数和小波函数实现环境光照的对比" />
+<figcaption>球谐函数和小波函数实现环境光照的对比</figcaption>
+</div>
+
+<p>但是对应的，小波函数也有其劣势：<strong>不支持快速旋转</strong>。一旦发生旋转的光照只能被认为是一个新的光照，所有计算过程需要全部重新走一遍（对应的，球谐函数由于有 simple rotation 的性质，对于光照的旋转十分支持，不需要重新计算所有数据）</p>
+<p>小波函数的具体内容在此不做额外展开</p>
+<p>本篇笔记主要参考了以下两篇博客，感谢 <a href="https://yangwc.com/about"><strong>WC Yang</strong></a> 和 <a href="https://www.zhihu.com/people/zhiwei-53-83"><strong>zhiwei</strong></a> 两位大佬的分享：</p>
+<p><a href="https://yangwc.com/2021/04/29/PRT/">高质量实时渲染：实时环境光 | YangWC&apos;s Blog</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/563676455">《GAMES202：高质量实时渲染》2 实时环境光照：Split Sum、PRT - 知乎 (zhihu.com)</a></p>
+<hr />
+<p>2023年7月
+ziao德</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      ziao德 CC-BY-4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://space.bilibili.com/184359860" target="_blank" rel="noopener" title="Bilibili | ziao德" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488.6 104.1c16.7 18.1 24.4 39.7 23.3 65.7v202.4c-.4 26.4-9.2 48.1-26.5 65.1-17.2 17-39.1 25.9-65.5 26.7H92.02c-26.45-.8-48.21-9.8-65.28-27.2C9.682 419.4.767 396.5 0 368.2V169.8c.767-26 9.682-47.6 26.74-65.7C43.81 87.75 65.57 78.77 92.02 78h29.38L96.05 52.19c-5.75-5.73-8.63-13-8.63-21.79 0-8.8 2.88-16.06 8.63-21.797C101.8 2.868 109.1 0 117.9 0s16.1 2.868 21.9 8.603L213.1 78h88l74.5-69.397C381.7 2.868 389.2 0 398 0c8.8 0 16.1 2.868 21.9 8.603 5.7 5.737 8.6 12.997 8.6 21.797 0 8.79-2.9 16.06-8.6 21.79L394.6 78h29.3c26.4.77 48 9.75 64.7 26.1zm-38.8 69.7c-.4-9.6-3.7-17.4-10.7-23.5-5.2-6.1-14-9.4-22.7-9.8H96.05c-9.59.4-17.45 3.7-23.58 9.8-6.14 6.1-9.4 13.9-9.78 23.5v194.4c0 9.2 3.26 17 9.78 23.5s14.38 9.8 23.58 9.8H416.4c9.2 0 17-3.3 23.3-9.8 6.3-6.5 9.7-14.3 10.1-23.5V173.8zm-264.3 42.7c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.2 6.3-14 9.5-23.6 9.5-9.6 0-17.5-3.2-23.6-9.5-6.1-6.3-9.4-14-9.8-23.2v-33.3c.4-9.1 3.8-16.9 10.1-23.2 6.3-6.3 13.2-9.6 23.3-10 9.2.4 17 3.7 23.3 10zm191.5 0c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.1 6.3-14 9.5-23.6 9.5-9.6 0-17.4-3.2-23.6-9.5-7-6.3-9.4-14-9.7-23.2v-33.3c.3-9.1 3.7-16.9 10-23.2 6.3-6.3 14.1-9.6 23.3-10 9.2.4 17 3.7 23.3 10z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cxd-Gilneas" target="_blank" rel="noopener" title="GitHub | ziao德" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.sections", "navigation.expand", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../../../mkdocs/javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  </body>
+</html>

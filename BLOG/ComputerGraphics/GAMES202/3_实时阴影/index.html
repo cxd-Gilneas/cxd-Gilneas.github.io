@@ -1,0 +1,1180 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ziao德的个人网站">
+      
+      
+        <meta name="author" content="ziao德">
+      
+      
+        <link rel="canonical" href="https://cxd-Gilneas.github.io/BLOG/ComputerGraphics/GAMES202/3_%E5%AE%9E%E6%97%B6%E9%98%B4%E5%BD%B1/">
+      
+      
+        <link rel="prev" href="../2_CG%E5%9F%BA%E7%A1%80%E6%A6%82%E8%BF%B0/">
+      
+      
+        <link rel="next" href="../4_%E5%AE%9E%E6%97%B6%E7%8E%AF%E5%A2%83%E5%85%89%E7%85%A7/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>三 实时阴影 Real-Time Shadows - ziao德的个人网站</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../mkdocs/css/no-footer.css">
+    
+      <link rel="stylesheet" href="../../../../mkdocs/css/unordered-list-symbols.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#real-time-shadows" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="ziao德的个人网站" class="md-header__button md-logo" aria-label="ziao德的个人网站" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ziao德的个人网站
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              三 实时阴影 Real-Time Shadows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        技术博客
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../ME/" class="md-tabs__link">
+        我
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="ziao德的个人网站" class="md-nav__button md-logo" aria-label="ziao德的个人网站" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ziao德的个人网站
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../">技术博客</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          技术博客
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" checked>
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+          计算机图形学
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          计算机图形学
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_1" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_1" id="__nav_1_2_1_label" tabindex="0">
+          GAMES202-高质量实时渲染
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          GAMES202-高质量实时渲染
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%AE%9E%E6%97%B6%E6%B8%B2%E6%9F%93%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        一 实时渲染概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_CG%E5%9F%BA%E7%A1%80%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        二 CG基础概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          三 实时阴影 Real-Time Shadows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        三 实时阴影 Real-Time Shadows
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-shadow-mapping" class="md-nav__link">
+    1 阴影映射概述 Shadow Mapping
+  </a>
+  
+    <nav class="md-nav" aria-label="1 阴影映射概述 Shadow Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pass" class="md-nav__link">
+    1）使用两趟 Pass 实现阴影
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2）阴影映射技术的优缺点
+  </a>
+  
+    <nav class="md-nav" aria-label="2）阴影映射技术的优缺点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-self-occlusion" class="md-nav__link">
+    （1）自遮挡现象 Self Occlusion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    （2）锯齿现象
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    2 阴影映射技术背后的数学
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-percentage-closer-soft-shadows-pcss" class="md-nav__link">
+    3 百分比渐进软阴影 Percentage Closer Soft Shadows (PCSS)
+  </a>
+  
+    <nav class="md-nav" aria-label="3 百分比渐进软阴影 Percentage Closer Soft Shadows (PCSS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-percentage-closer-filtering-pcf" class="md-nav__link">
+    1）百分比渐进滤波 Percentage Closer Filtering (PCF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-percentage-closer-soft-shadows-pcss" class="md-nav__link">
+    2）百分比渐进软阴影 Percentage Closer Soft Shadows (PCSS)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3pcss" class="md-nav__link">
+    3）PCSS 存在的问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-variance-soft-shadow-mapping-vssm" class="md-nav__link">
+    4 方差软阴影映射 Variance Soft Shadow Mapping (VSSM)
+  </a>
+  
+    <nav class="md-nav" aria-label="4 方差软阴影映射 Variance Soft Shadow Mapping (VSSM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1vssm" class="md-nav__link">
+    1）VSSM 的基本思想
+  </a>
+  
+    <nav class="md-nav" aria-label="1）VSSM 的基本思想">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1shadow-map" class="md-nav__link">
+    （1）Shadow Map 深度值平均值的求解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2shadow-map" class="md-nav__link">
+    （2）Shadow Map 深度值方差的求解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    （3）切比雪夫不等式近似获得互补累积分布函数值
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2vssm" class="md-nav__link">
+    2）VSSM 实现软阴影的基本流程
+  </a>
+  
+    <nav class="md-nav" aria-label="2）VSSM 实现软阴影的基本流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-blocker-search" class="md-nav__link">
+    （1）查找遮挡物的平均深度 Blocker Search
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-penumbra-estimation" class="md-nav__link">
+    （2）半影估计 Penumbra estimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-percentage-closer-filtering" class="md-nav__link">
+    （3）百分比渐进滤波 Percentage Closer Filtering
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3vssm" class="md-nav__link">
+    3）VSSM 存在的问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-moment-shadow-mapping" class="md-nav__link">
+    5 矩阴影映射 Moment Shadow Mapping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-distance-field-soft-shadow-dfss" class="md-nav__link">
+    6 距离场软阴影 Distance Field Soft Shadow (DFSS)
+  </a>
+  
+    <nav class="md-nav" aria-label="6 距离场软阴影 Distance Field Soft Shadow (DFSS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ray-marching" class="md-nav__link">
+    1）有向距离场的应用1：光线步进 Ray Marching
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-dfss" class="md-nav__link">
+    2）有向距离场的应用2：距离场软阴影 DFSS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3sdf" class="md-nav__link">
+    3）SDF 存在的问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E5%AE%9E%E6%97%B6%E7%8E%AF%E5%A2%83%E5%85%89%E7%85%A7/" class="md-nav__link">
+        四 实时环境光照 Real-Time Environment Mapping
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E5%AE%9E%E6%97%B6%E5%85%A8%E5%B1%80%E5%85%89%E7%85%A7/" class="md-nav__link">
+        五 实时全局光照 Real-Time Global Illumination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E5%AE%9E%E6%97%B6%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9D%80%E8%89%B2/" class="md-nav__link">
+        六 实时高质量着色 Real-Time Physically-based Materials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E5%AE%9E%E6%97%B6%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" class="md-nav__link">
+        七 实时光线追踪 Real-Time Ray-Tracing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E5%AE%9E%E6%97%B6%E6%B8%B2%E6%9F%93%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B7%A5%E4%B8%9A%E7%95%8C%E6%8A%80%E6%9C%AF/" class="md-nav__link">
+        八 实时渲染中常用的工业界技术
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../ME/">我</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          我
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+<h1 id="real-time-shadows">三 实时阴影 Real-Time Shadows<a class="headerlink" href="#real-time-shadows" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本课程为闫令琪老师的 <a href="https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html">GAMES202-高质量实时渲染</a></p>
+<p>此为个人的课堂笔记，如有疏漏，请多指正</p>
+</blockquote>
+<h2 id="1-shadow-mapping">1 阴影映射概述 Shadow Mapping<a class="headerlink" href="#1-shadow-mapping" title="Permanent link">&para;</a></h2>
+<h3 id="1-pass">1）使用两趟 Pass 实现阴影<a class="headerlink" href="#1-pass" title="Permanent link">&para;</a></h3>
+<ol>
+<li>第一个 Pass 获得从 Light 看向场景时（将摄像机放到光源位置上）的深度信息，输出为阴影纹理 Shadow Map</li>
+<li>第二个 Pass 从真正的摄像机的位置渲染整个场景，并使用阴影映射采样计算每个点是否会处在阴影里</li>
+</ol>
+<p>具体内容参考 <strong>GAMES101-几何（网格处理）、阴影图</strong></p>
+<h3 id="2">2）阴影映射技术的优缺点<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>优点：输出了阴影纹理之后，就不需要场景的几何信息了，仅需对阴影纹理采样即可</li>
+<li>缺点：会出现自遮挡现象和锯齿，并且只能实现硬阴影</li>
+</ul>
+<h4 id="1-self-occlusion">（1）自遮挡现象 Self Occlusion<a class="headerlink" href="#1-self-occlusion" title="Permanent link">&para;</a></h4>
+<p>由于是从阴影映射纹理进行采样，某个像素的深度信息可能会被邻近像素的信息覆盖掉（因为像素是有大小的）。当光线与表面越平行，问题越严重</p>
+<div align=center>
+<img src="../assets/image-20230705001326-2o5ytoh.png" width = "50%" alt="自遮挡现象  Self Occlusion" />
+<figcaption>自遮挡现象  Self Occlusion</figcaption>
+</div>
+
+<p>解决方案1：添加一个可变的 bias 来减少自遮挡现象。但是会导致某些原本虽然距离很近但应该显示的阴影发生丢失现象</p>
+<div align=center>
+<img src="../assets/image-20230705001340-386km3y.png" width = "50%" alt="添加一个可变的 bias 来减少自遮挡现象" />
+<figcaption>添加一个可变的 bias 来减少自遮挡现象</figcaption>
+</div>
+
+<p>解决方案2：Second-depth shadow mapping 技术，计算最小深度和次小深度两个深度信息，使用二者的平均值作为深度信息来做后续的阴影计算。但是这种方法要求投射阴影的物体必须为闭合曲面 (watertight) ，并且多了一个 Pass 导致性能消耗变大，和<strong>实时渲染的速度要求</strong>不匹配，即使它的复杂度和只计算一次是相同的——实时渲染不相信算法复杂度，只相信实际的绝对速度</p>
+<div align=center>
+<img src="../assets/image-20230719103928-sxcfg6o.png" width = "50%" alt="Second-depth shadow mapping 技术" />
+<figcaption>Second-depth shadow mapping 技术</figcaption>
+</div>
+
+<h4 id="2_1">（2）锯齿现象<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<p>由于阴影纹理本身是有一定大小的，如果分辨率不够大，则某些阴影处会出现锯齿现象（也是因为像素是有大小的）</p>
+<h2 id="2_2">2 阴影映射技术背后的数学<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h2>
+<p>由于实时渲染不要求“绝对精确”，而是要求“看起来是正确的”，因此有一个约等式便十分关键：</p>
+<div class="arithmatex">\[
+\int_{\Omega} f(x)g(x)dx\approx \frac{\int_{\Omega}f(x)dx}{\int_{\Omega}dx}\cdot \int_{\Omega}g(x)dx
+\]</div>
+<p>在两种情况下这个约等式的近似度更高：</p>
+<ol>
+<li><span class="arithmatex">\(g(x)\)</span> 的 <strong>support 特别小</strong>的时候，即积分率（支撑集）特别小的时候</li>
+<li><span class="arithmatex">\(g(x)\)</span> <strong>特别平滑 smooth ​</strong>的时候，即在积分率范围内变动特别小，最大值和最小值差别很小（甚至相同，即常量函数）的时候</li>
+</ol>
+<p>在渲染方程中，可以将 可见度<span class="arithmatex">\(V\)</span> 作为 <span class="arithmatex">\(f(x)\)</span> 提出来，则 <span class="arithmatex">\(g(x)\)</span> 就是最普通的 shading，这样就可以在计算完 shading 之后再乘上 可见度<span class="arithmatex">\(V\)</span>，这也便是阴影映射技术的实现思想（先计算 shading，然后再将阴影映射纹理采样的结果乘到这个 shading 上），也是其效果比较好的原因</p>
+<div class="arithmatex">\[
+\begin{align}
+L_o(p,\omega_o)=&amp;\int_{\Omega^+}L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)cos\theta_i V(p,\omega_i)d\omega_i\\
+\approx&amp;\frac{f_{\Omega^+}V(p,\omega_i)d\omega_i}{\int_{\Omega^+}d\omega_i}
+\cdot \int_{\Omega^+}L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)cos\theta_i d\omega_i
+\end{align}
+\]</div>
+<p>而对应于两种近似度更高的情况：</p>
+<ol>
+<li><span class="arithmatex">\(g(x)\)</span> 的 support 特别小的时候，对应着<strong>只有一个点光源 point lighting 或方向光源 directional lighting ​</strong>的情况（要么可见要么不可见）</li>
+<li><span class="arithmatex">\(g(x)\)</span> 特别平滑 smooth 的时候，对应着<strong>光源是一个不会有光强变化的面光源 constant radiance area lighting 或表面只有漫反射 diffuse BRDF ​</strong>的情况</li>
+</ol>
+<h2 id="3-percentage-closer-soft-shadows-pcss">3 百分比渐进软阴影 Percentage Closer Soft Shadows (PCSS)<a class="headerlink" href="#3-percentage-closer-soft-shadows-pcss" title="Permanent link">&para;</a></h2>
+<p><strong>软阴影 Soft Shadows</strong>：没有一个从无阴影到有阴影的区分线，而是渐进变化的。因为日常生活中的光源往往是面光源，其产生的阴影就是软阴影（区别于点光源和方向光源的硬阴影），阴影的部分往往总是部分被遮挡部分没有被遮挡</p>
+<h3 id="1-percentage-closer-filtering-pcf">1）百分比渐进滤波 Percentage Closer Filtering (PCF)<a class="headerlink" href="#1-percentage-closer-filtering-pcf" title="Permanent link">&para;</a></h3>
+<p>PCF 是一种解决 Shadow Map 存在的锯齿问题的滤波算法。具体做法是用 采样点x 的深度去和周围区域点在 Shadow Map 上的深度做比较，将比较的结果加权平均后作为 采样点x 的可见性，于是阴影的数值从非黑即白的0和1变为<strong>连续的0至1之间的颜色</strong></p>
+<p>注意：PCF 不是对最后生成的图像进行滤波，也不是在 Shadow Map 上直接进行滤波，而是对采样的结果进行滤波</p>
+<h3 id="2-percentage-closer-soft-shadows-pcss">2）百分比渐进软阴影 Percentage Closer Soft Shadows (PCSS)<a class="headerlink" href="#2-percentage-closer-soft-shadows-pcss" title="Permanent link">&para;</a></h3>
+<p>在 PCF 的基础上，如果 Filter 取的过大，则某个点的阴影会和过多的点发生加权，导致结果上虽然实现了抗锯齿，但是阴影效果就完全糊掉了。而这种“糊掉”虽然对硬阴影是不正确的，但却正是软阴影所需要的。因此，可以通过调整 Filter 的取值范围来实现不同需求的软阴影，即 PCSS 技术</p>
+<p>使用 PCSS 实现软阴影最关键的问题在于<strong>如何取 Filter 的值</strong>。滤波半径决定了阴影边缘的柔和程度，一般来说滤波半径越大则柔和，相反阴影边缘越锐利。通过观察实际现象可发现，阴影区域在越靠近遮挡物的地方越硬，而越远离遮挡物的地方越软，因此可以根据投影区域到遮挡物的距离来调整滤波半径的大小</p>
+<div align=center>
+<img src="../assets/image-20230719105646-a8gzmyf.png" width = "25%" alt="阴影柔和程度的变化" />
+<figcaption>阴影柔和程度的变化</figcaption>
+</div>
+
+<p>由于现实中的光源往往是面光源而不是完全理想的点光源或方向光源，其光线被遮挡后会产生半影，阴影的软化程度本质上取决于半影区域的大小，半影区域越大则阴影越柔和。当面光源位置不变时，遮挡物 Blocker 与接收阴影的面的距离越远，则半影区域的面积会越大，阴影越软；而当遮挡物 Blocker 与接收阴影的面的距离不变时，面光源的宽度越宽，则半影区域的面积会越大，阴影越软</p>
+<div align=center>
+<img src="../assets/image-20230705001516-abog4m8.png" width = "25%" alt="半影长度推算" />
+<figcaption>半影长度推算</figcaption>
+</div>
+
+<p>根据三角形相似得到如下等式：</p>
+<div class="arithmatex">\[
+W_{Penumbra}=(d_{Receiver}-d_{Blocker})\cdot w_{light}/d_{Blocker}
+\]</div>
+<p>其中，<span class="arithmatex">\(d_{Receiver}\)</span> 是阴影接收区域到光源的距离，<span class="arithmatex">\(d_{Blocker}\)</span> 是遮挡物到光源的距离，这两个参数都可以直接从第一个 Pass 生成的深度图获取得到，光源面积 <span class="arithmatex">\(w_{light}\)</span> 手动指定。上述等式计算得到的半影长度 <span class="arithmatex">\(W_{Penumbra}\)</span> 就可以作为 PCF 滤波半径的大小参数</p>
+<p>因此，PCSS 实现软阴影的基本流程如下：</p>
+<ol>
+<li>查找遮挡物的平均深度 Blocker Search：获得一个特定区域内的<strong>遮挡物的平均遮挡距离 ​</strong>getting the <strong>average blocker depth</strong> in <strong>a certain region</strong>
+    （注意：是发生遮挡的物体的平均深度，在这个 certain region 里不发生遮挡的点不参与计算）</li>
+<li>伴影估计 Penumbra estimation：使用平均遮挡物距离决定滤波核大小 use the average blocker depth to determine <strong>filter size</strong></li>
+<li>百分比渐进滤波 Percentage Closer Filtering：根据滤波核大小对该区域内的深度值进行加权平均</li>
+</ol>
+<p>在这里，第1步中查找遮挡物的平均深度时需要一个特定范围 a certain region，这个特定范围可以经验性取值，或者根据如下示意图，根据点连接到面光源的距离 receiver's distance from the light + 面光源大小 light size 共同决定 a certain region（图中红色的部分）：</p>
+<div align=center>
+<img src="../assets/image-20230705001539-lg62tbn.png" width = "33%" alt="查找遮挡物的平均深度时的特定范围" />
+<figcaption>查找遮挡物的平均深度时的特定范围</figcaption>
+</div>
+
+<h3 id="3pcss">3）PCSS 存在的问题<a class="headerlink" href="#3pcss" title="Permanent link">&para;</a></h3>
+<p>以上 PCSS 流程的耗时特别长，主要在于第1步和第3步都需要进行一个区域内的采样：一旦这个 Filter 的区域过大（为了保证软阴影的实现效果），耗时就会过长。工业界的解决方案之一是在这个区域内随机地进行稀疏采样以达到近似的效果，例如随机圆盘采样和泊松圆盘采样，但是有可能会引入噪声的问题</p>
+<h2 id="4-variance-soft-shadow-mapping-vssm">4 方差软阴影映射 Variance Soft Shadow Mapping (VSSM)<a class="headerlink" href="#4-variance-soft-shadow-mapping-vssm" title="Permanent link">&para;</a></h2>
+<p>VSSM 是针对于 PCSS 在第1步和第3步都需要对深度图进行采样而导致耗时特别长的问题而提出的一种解决方案</p>
+<h3 id="1vssm">1）VSSM 的基本思想<a class="headerlink" href="#1vssm" title="Permanent link">&para;</a></h3>
+<p>PCSS 的第3步，本质上是通过卷积算法算区域深度的平均值，然后跟当前深度进行比较，根据这个比较值进行阴影的淡化。这个过程完全可以理解为找到当前深度在该区域内的<strong>百分比位置</strong>，直接用这个百分比来淡化阴影</p>
+<p>而 PCSS 的第1步中有关于遮挡物深度平均值的计算过程，也可以利用这个<strong>百分比</strong>的思想快速求解（具体的快速求解过程参考下一小节）</p>
+<p>于是，VSSM 便基于这个<strong>百分比</strong>的思想进行了改进：不再遍历 a certain region 中的所有点，而是利用它们的深度值的<strong>正态分布</strong>快速得到当前点的<strong>百分比位置</strong>。而为了得到深度值的正态分布，仅需知道所有深度值的<strong>平均值</strong>和<strong>方差</strong>即可，其中平均值可以通过 Summed Area Tables (SAT) 算法快速获得，方差可以通过 <span class="arithmatex">\(Var(X)=E(X^2)-E^2(X)\)</span> 快速获得。进一步，为了避免通过查<strong>误差函数 erf ​</strong>的表来获得正态分布的<strong>累积分布函数 CDF</strong>，可以利用<strong>切比雪夫不等式</strong>近似获得当前正态分布的<strong>互补累积分布函数值</strong>，即右尾函数 <span class="arithmatex">\(Q(x)\)</span>，将查表的复杂度降至常数级</p>
+<p>上述这个掺杂了各种近似计算的过程可以用如下流程表示：</p>
+<ol>
+<li>根据 SAT 算法快速求解平均值</li>
+<li>根据平均值快速求解方差</li>
+<li>根据平均值+方差+切比雪夫不等式快速获得正态分布的互补累积分布函数，即右尾函数 <span class="arithmatex">\(Q(x)\)</span></li>
+<li>根据右尾函数 <span class="arithmatex">\(Q(x)\)</span> 快速获得当前点的百分比位置</li>
+</ol>
+<h4 id="1shadow-map">（1）Shadow Map 深度值平均值的求解<a class="headerlink" href="#1shadow-map" title="Permanent link">&para;</a></h4>
+<p>Summed Area Tables (SAT) 算法：算法思想为前缀和 prefix sum，利用一张额外的表记录前缀和，通过空间换时间</p>
+<p>一维情况：</p>
+<div align=center>
+<img src="../assets/image-20230705110200-azbp9xf.png" width = "33%" alt="SAT 的一维情况" />
+<figcaption>SAT 的一维情况</figcaption>
+</div>
+
+<p><span class="arithmatex">\(Sum(index3 \rightarrow index5) = 3 + 7 + 1 = 11 = SAT(5) - SAT(2) = 20 - 9 = 11\)</span>，其中 <span class="arithmatex">\(SAT(i)=\sum\limits_{j≤1}Texture(j)\)</span></p>
+<p>二维情况：</p>
+<div align=center>
+<img src="../assets/image-20230705110313-9htvohz.png" width = "25%" alt="SAT 的二维情况" />
+<figcaption>SAT 的二维情况</figcaption>
+</div>
+
+<p><span class="arithmatex">\(S(ABCD) = SAT(D) - SAT(B) - SAT(C) + SAT(A)\)</span>，其中 <span class="arithmatex">\(SAT(x,y)=\sum\limits_{x'≤x,y'≤y}Texture(x',y')\)</span></p>
+<p>在 Shadow Map 中获得特定区域的深度平均值的计算过程就和二维情况相同</p>
+<h4 id="2shadow-map">（2）Shadow Map 深度值方差的求解<a class="headerlink" href="#2shadow-map" title="Permanent link">&para;</a></h4>
+<p>对于正态分布来说，<span class="arithmatex">\(Var(X)=E(X^2)-E^2(X)\)</span>，因此只需要在 Shadow Map 深度纹理的另一个 rgb 某个通道中同时记录<strong>深度值的平方</strong>即可</p>
+<h4 id="3">（3）切比雪夫不等式近似获得<strong>互补累积分布函数值</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<div align=center>
+<img src="../assets/image-20230705111703-tyqzhid.png" width = "25%" alt="切比雪夫不等式" />
+<figcaption>切比雪夫不等式</figcaption>
+</div>
+
+<p>当 t 值取在正态分布的右半边时满足切比雪夫不等式，因此就可以通过<strong>平均值</strong>和<strong>方差</strong>直接计算得到互补累积函数，即右尾函数 <span class="arithmatex">\(Q(x)\)</span>，从而直接得到 t 值对应的百分比位置</p>
+<p>通过以上思想，可以将每一个步骤的时间复杂度控制在<strong>常数级</strong>，完全不会有任何循环遍历的操作</p>
+<h3 id="2vssm">2）VSSM 实现软阴影的基本流程<a class="headerlink" href="#2vssm" title="Permanent link">&para;</a></h3>
+<p>同样是 PCSS 的三步流程，但是第1步和第3步的相关循环遍历操作转换为快速的近似计算：</p>
+<h4 id="1-blocker-search">（1）查找遮挡物的平均深度 Blocker Search<a class="headerlink" href="#1-blocker-search" title="Permanent link">&para;</a></h4>
+<p>获得一个特定区域内的<strong>遮挡物的平均遮挡距离 ​</strong>getting the <strong>average blocker depth</strong> in <strong>a certain region</strong></p>
+<p>VSSM 中不进行该区域的循环遍历，而是通过下面这个等式直接计算得到<strong>遮挡物的平均深度</strong></p>
+<div align=center>
+<img src="../assets/image-20230705112509-8nq5a7g.png" width = "50%" alt="VSSM 的 Blocker Search" />
+<figcaption>VSSM 的 Blocker Search</figcaption>
+</div>
+
+<p>其中：</p>
+<ol>
+<li>特定区域 certain region 的平均深度 <span class="arithmatex">\(Z_{Avg}\)</span>：通过 VSSM 的基本思想——Summed Area Tables (SAT) 算法直接从整张纹理取得这一块特定区域的平均深度</li>
+<li>非遮挡物的比例 <span class="arithmatex">\(N_1/N\)</span> 和遮挡物的比例 <span class="arithmatex">\(N_2/N\)</span>：通过 VSSM 的基本思想——切比雪夫不等式近似获得 <span class="arithmatex">\(N_1/N = P(x &gt; t)\)</span> 和 <span class="arithmatex">\(N_2/N = 1 - P(x &gt; t)\)</span></li>
+<li>非遮挡物的平均深度 <span class="arithmatex">\(Z_{unocc}\)</span>：直接假定是当前查找的这个点的深度，即 <span class="arithmatex">\(Z_{unocc} = t\)</span></li>
+</ol>
+<p>然后就可以将上述等式视为一个一元一次方程解得<strong>遮挡物的平均深度 ​</strong>​<span class="arithmatex">\(Z_{occ}\)</span> 的值</p>
+<h4 id="2-penumbra-estimation">（2）半影估计 Penumbra estimation<a class="headerlink" href="#2-penumbra-estimation" title="Permanent link">&para;</a></h4>
+<p>使用平均遮挡物距离决定滤波核大小 use the average blocker depth to determine <strong>filter size</strong></p>
+<div class="arithmatex">\[
+W_{Penumbra}=(d_{Receiver}-d_{Blocker})\cdot w_{light}/d_{Blocker}
+\]</div>
+<p>使用上述等式计算得到的半影长度 <span class="arithmatex">\(W_{Penumbra}\)</span> 作为 PCF 滤波半径的大小参数</p>
+<h4 id="3-percentage-closer-filtering">（3）百分比渐进滤波 Percentage Closer Filtering<a class="headerlink" href="#3-percentage-closer-filtering" title="Permanent link">&para;</a></h4>
+<p>根据滤波核大小对该区域内的深度值进行加权平均</p>
+<p>VSSM 中不进行该区域的循环遍历，不进行加权平均的计算，而是直接通过 VSSM 的基本思想——切比雪夫不等式近似获得该区域比当前深度值 t 小的点占总数的<strong>比例 ​</strong>​<span class="arithmatex">\(ratio\)</span>，则当前点的可见性即为 <span class="arithmatex">\(V \cdot ratio\)</span></p>
+<p>例如当前点深度为3.5，Shadow Map 上该查找区域的深度值分别为 {1，2，3，4，5，6，7，8，9}，则希望利用切比雪夫不等式近似得到值3 / 9 = 0.333</p>
+<h3 id="3vssm">3）VSSM 存在的问题<a class="headerlink" href="#3vssm" title="Permanent link">&para;</a></h3>
+<p>由于使用了切比雪夫不等式，必须要求区域内的深度值是呈正态分布的。一旦分布不是正态的（例如离散多峰的情况），就会导致利用切比雪夫不等式计算的 <span class="arithmatex">\(Q(x)\)</span> 大小不正确，导致阴影强度偏强（更暗）或变弱（更亮，即<strong>漏光现象 Light Leaking</strong>）</p>
+<div align=center>
+<img src="../assets/image-20230705142541-dslgqoe.png" width = "33%" alt="非正态分布时的切比雪夫不等式计算" />
+<figcaption>非正态分布时的切比雪夫不等式计算</figcaption>
+</div>
+
+<div align=center>
+<img src="../assets/image-20230705142634-s7s8m3w.png" width = "33%" alt="VSSM 的漏光现象 Light Leaking" />
+<figcaption>VSSM 的漏光现象 Light Leaking</figcaption>
+</div>
+
+<h2 id="5-moment-shadow-mapping">5 矩阴影映射 Moment Shadow Mapping<a class="headerlink" href="#5-moment-shadow-mapping" title="Permanent link">&para;</a></h2>
+<p>Moment Shadow Mapping 的基本数学原理是：当记录更多阶的矩 (moment)，就可以拟合出更准确的函数曲线</p>
+<p>具体到 VSSM 中，计算方差时使用了一阶矩 <span class="arithmatex">\(X\)</span> 和二阶矩 <span class="arithmatex">\(X^2\)</span>，因此 VSSM 记录了两个矩来拟合 CDF 曲线</p>
+<p>每记录前 <span class="arithmatex">\(m\)</span> 阶矩，就可以更准确地拟合有 <span class="arithmatex">\(m/2\)</span> 个 step 的阶跃函数：</p>
+<div align=center>
+<img src="../assets/image-20230705143449-z8m7o98.png" width = "33%" alt="PCF、2阶、3阶、4阶近似逼近的结果比较" />
+<figcaption>PCF、2阶、3阶、4阶近似逼近的结果比较</figcaption>
+</div>
+
+<p>使用 Moment Shadow Mapping 便可以避免 VSSM 中可能发生的漏光现象：</p>
+<div align=center>
+<img src="../assets/image-20230705143710-jfze1qw.png" width = "67%" alt="MSM 和 VSSM 效果比较" />
+<figcaption>MSM 和 VSSM 效果比较</figcaption>
+</div>
+
+<p>但是由于四阶函数的拟合计算更加复杂，这也会导致时间成本的显著增加</p>
+<h2 id="6-distance-field-soft-shadow-dfss">6 距离场软阴影 Distance Field Soft Shadow (DFSS)<a class="headerlink" href="#6-distance-field-soft-shadow-dfss" title="Permanent link">&para;</a></h2>
+<p><strong>距离场 Distance functions/Distance field</strong>: At any point, giving the minimum distance (could be signed distance -- signed distance field (SDF)) to the closest location on an object. 对于空间中的任意一点，它都有一个和某个物体表面的最近的一个点的距离（这些距离信息统称为距离场），并且这个距离可以根据在物体内部或者外部附上方向（即有向距离场）</p>
+<p>一个二维距离场的可视化：</p>
+<div align=center>
+<img src="../assets/image-20230706160458-o8zvmdc.png" width = "25%" alt="二维距离场的可视化" />
+<figcaption>二维距离场的可视化</figcaption>
+</div>
+
+<p>一个三维距离场的可视化：</p>
+<div align=center>
+<img src="../assets/image-20230706163409-dj31m1c.png" width = "33%" alt="三维距离场的可视化" />
+<figcaption>三维距离场的可视化</figcaption>
+</div>
+
+<h3 id="11-ray-marching">1）有向距离场的应用1：光线步进 Ray Marching<a class="headerlink" href="#11-ray-marching" title="Permanent link">&para;</a></h3>
+<p>Ray Marching 是一种用于实现光线追踪的技术</p>
+<p>可以利用 SDF 进行 Sphere Tracing 来实现光线步进：SDF 定义了该点到最近表面的距离，这个距离是一个“安全距离”，表明了从该点出发向任意方向行进这么长的距离都不会与任何物体相交。因此，如果已经获得了场景的 SDF 信息，就可以很快地实现光线步进，直到光线和某个物体相交（SDF 对应值很小）或者超出光线最大距离</p>
+<div align=center>
+<img src="../assets/image-20230706161603-weycffc.png" width = "33%" alt="SDF 应用于 Ray Marching" />
+<figcaption>SDF 应用于 Ray Marching</figcaption>
+</div>
+
+<h3 id="22-dfss">2）有向距离场的应用2：距离场软阴影 DFSS<a class="headerlink" href="#22-dfss" title="Permanent link">&para;</a></h3>
+<p>可以利用 SDF 获得任意一个点的“安全角度”，即在这个角度范围内光线是不会被遮挡的。因此如果从某个着色点出发看向光源的“安全角度”越小，说明这个点被遮挡的程度越高，可见度越低，需要产生的阴影越黑（当该着色点看向面光源的所有点的安全角度均为0时，说明该点被完全遮蔽，可见度为0）。这种实现阴影的方法并不物理准确，但是效果比较好</p>
+<p>注：对于任意一条光线，在 Trace 的过程中取得的多个“安全角度”中，取其中的最小值</p>
+<div align=center>
+<img src="../assets/image-20230706162823-n12z4op.png" width = "25%" alt="利用 SDF 获取 安全角度θ" />
+<figcaption>利用 SDF 获取 安全角度θ</figcaption>
+</div>
+
+<p>而想要计算这个 角度<span class="arithmatex">\(\theta\)</span>，标准计算方法为取反三角函数：</p>
+<div class="arithmatex">\[
+arcsin\frac{SDF(p)}{|p-o|}
+\]</div>
+<p>但是反三角函数的计算量会很大，因此使用了如下近似计算方法：</p>
+<div class="arithmatex">\[
+\min \{\frac{k\cdot SDF(p)}{|p-o|},1.0\}
+\]</div>
+<p>其中，<span class="arithmatex">\(k\)</span> 为缩放系数，其值可以决定阴影的软硬程度，<span class="arithmatex">\(k\)</span> 值越大，则计算得到的半影大小会越小（因为 角度<span class="arithmatex">\(\theta\)</span> 越大，则表示越不在遮挡范围内），阴影越硬：</p>
+<div align=center>
+<img src="../assets/image-20230706163257-vhloqn4.png" width = "25%" alt="SDF 实现软阴影" />
+<figcaption>SDF 实现软阴影</figcaption>
+</div>
+
+<h3 id="3sdf">3）SDF 存在的问题<a class="headerlink" href="#3sdf" title="Permanent link">&para;</a></h3>
+<p>SDF 的优势：速度快（只计算使用时的时间，而不计算预生成所需要的时间），高质量</p>
+<p>SDF 的问题：需要时间较长的预计算，需要很大的存储空间（特别是非静态场景）</p>
+<p>本篇笔记主要参考了以下两篇博客，感谢 <a href="https://yangwc.com/about"><strong>WC Yang</strong></a> 和 <a href="https://www.zhihu.com/people/zhiwei-53-83"><strong>zhiwei</strong></a> 两位大佬的分享：</p>
+<p><a href="https://yangwc.com/2021/04/14/PCSS/">高质量实时渲染：实时软阴影 | YangWC&apos;s Blog</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/563672775">《GAMES202：高质量实时渲染》1 实时阴影：阴影映射（Shadow Mapping）、PCSS、VSSM、SDF Shadows - 知乎 (zhihu.com)</a></p>
+<hr />
+<p>2023年7月
+ziao德</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      ziao德 CC-BY-4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://space.bilibili.com/184359860" target="_blank" rel="noopener" title="Bilibili | ziao德" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488.6 104.1c16.7 18.1 24.4 39.7 23.3 65.7v202.4c-.4 26.4-9.2 48.1-26.5 65.1-17.2 17-39.1 25.9-65.5 26.7H92.02c-26.45-.8-48.21-9.8-65.28-27.2C9.682 419.4.767 396.5 0 368.2V169.8c.767-26 9.682-47.6 26.74-65.7C43.81 87.75 65.57 78.77 92.02 78h29.38L96.05 52.19c-5.75-5.73-8.63-13-8.63-21.79 0-8.8 2.88-16.06 8.63-21.797C101.8 2.868 109.1 0 117.9 0s16.1 2.868 21.9 8.603L213.1 78h88l74.5-69.397C381.7 2.868 389.2 0 398 0c8.8 0 16.1 2.868 21.9 8.603 5.7 5.737 8.6 12.997 8.6 21.797 0 8.79-2.9 16.06-8.6 21.79L394.6 78h29.3c26.4.77 48 9.75 64.7 26.1zm-38.8 69.7c-.4-9.6-3.7-17.4-10.7-23.5-5.2-6.1-14-9.4-22.7-9.8H96.05c-9.59.4-17.45 3.7-23.58 9.8-6.14 6.1-9.4 13.9-9.78 23.5v194.4c0 9.2 3.26 17 9.78 23.5s14.38 9.8 23.58 9.8H416.4c9.2 0 17-3.3 23.3-9.8 6.3-6.5 9.7-14.3 10.1-23.5V173.8zm-264.3 42.7c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.2 6.3-14 9.5-23.6 9.5-9.6 0-17.5-3.2-23.6-9.5-6.1-6.3-9.4-14-9.8-23.2v-33.3c.4-9.1 3.8-16.9 10.1-23.2 6.3-6.3 13.2-9.6 23.3-10 9.2.4 17 3.7 23.3 10zm191.5 0c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.1 6.3-14 9.5-23.6 9.5-9.6 0-17.4-3.2-23.6-9.5-7-6.3-9.4-14-9.7-23.2v-33.3c.3-9.1 3.7-16.9 10-23.2 6.3-6.3 14.1-9.6 23.3-10 9.2.4 17 3.7 23.3 10z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/cxd-Gilneas" target="_blank" rel="noopener" title="GitHub | ziao德" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.sections", "navigation.expand", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../../../mkdocs/javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  </body>
+</html>

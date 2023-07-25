@@ -78,3 +78,8 @@ GLSL (OpenGL), HLSL (DirectX), CG (NVIDIA) 都是着色语言
 </div>
 
 在实时渲染中，对于全局光照 = 直接光照 + 间接光照中的间接光照只处理 **One-bounce 一次**间接反射
+
+
+---
+2023年7月
+ziao德
